@@ -1,0 +1,193 @@
+{
+  "tags": [
+    {
+      "name": "Shop",
+      "description": "Operations related to Shops"
+    }
+  ],
+  "swagger": "2.0",
+  "paths": {
+    "/api/shops/{id}": {
+      "patch": {
+        "tags": [
+          "Shop"
+        ],
+        "summary": "Update an existing shop",
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Shop"
+            },
+            "description": "Ok"
+          }
+        },
+        "parameters": [
+          {
+            "type": "string",
+            "required": true,
+            "name": "Authorization",
+            "in": "header",
+            "description": "OAuth2 access token"
+          },
+          {
+            "type": "string",
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "description": "The uuid of the shop"
+          },
+          {
+            "schema": {
+              "$ref": "#/definitions/Shop"
+            },
+            "required": false,
+            "name": "shop",
+            "in": "body",
+            "description": "The shop details to update"
+          }
+        ],
+        "operationId": "PhenixDisplaysWeb.API.Public.ShopController.update",
+        "description": "Record changes to a recorded shop"
+      },
+      "get": {
+        "tags": [
+          "Shop"
+        ],
+        "summary": "Retrieve a shop",
+        "responses": {
+          "404": {
+            "description": "Not found"
+          },
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Shop"
+            },
+            "description": "Ok"
+          }
+        },
+        "parameters": [
+          {
+            "type": "string",
+            "required": true,
+            "name": "Authorization",
+            "in": "header",
+            "description": "OAuth2 access token"
+          },
+          {
+            "type": "string",
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "description": "The uuid of the shop"
+          }
+        ],
+        "operationId": "PhenixDisplaysWeb.API.Public.ShopController.show",
+        "description": "Retrieve a shop that you have recorded"
+      }
+    },
+    "/api/shops": {
+      "get": {
+        "tags": [
+          "Shop"
+        ],
+        "summary": "List shops",
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/Shops"
+            },
+            "description": "Ok"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "required": true,
+            "name": "Authorization",
+            "in": "header",
+            "description": "OAuth2 access token"
+          },
+          {
+            "x-example": "1",
+            "type": "string",
+            "required": true,
+            "name": "network_filter",
+            "in": "query",
+            "description": "The property to select shops associated to specified network"
+          },
+          {
+            "x-example": "network_shop",
+            "type": "string",
+            "required": true,
+            "name": "filter",
+            "in": "query",
+            "description": "The property to exlude shops associated to networks"
+          }
+        ],
+        "operationId": "PhenixDisplaysWeb.API.Public.ShopController.index",
+        "description": "List shops"
+      }
+    }
+  },
+  "info": {
+    "version": "1.0",
+    "title": "Phenix Displays"
+  },
+  "host": "localhost:4000",
+  "definitions": {
+    "Shops": {
+      "type": "array",
+      "title": "Shops",
+      "items": {
+        "$ref": "#/definitions/Shop"
+      },
+      "description": "A collection of shops"
+    },
+    "Shop": {
+      "type": "object",
+      "title": "Shop",
+      "required": [
+        "uuid"
+      ],
+      "properties": {
+        "uuid": {
+          "type": "integer",
+          "description": "Unique identifier"
+        },
+        "shop_kind_id": {
+          "type": "integer"
+        },
+        "planning_enabled": {
+          "type": "boolean"
+        },
+        "picto_url": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "address": {
+          "type": "string"
+        }
+      },
+      "example": {
+        "shop_kind_id": 1,
+        "planning_enabled": false,
+        "picto_url": "shop_picto_url",
+        "name": "Shop_name",
+        "id": 1,
+        "address": "shop_address"
+      },
+      "description": "A shop of the application"
+    }
+  }
+}
