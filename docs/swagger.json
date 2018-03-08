@@ -142,6 +142,7 @@
     "x-logo": {
       "url": "https://pbs.twimg.com/profile_images/720923595455799296/zWiQUhT0_400x400.jpg"
     },
+    "x-isnullable": true,
     "version": "1.0",
     "title": "Phenix Displays"
   },
