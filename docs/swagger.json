@@ -156,6 +156,7 @@
       "description": "A collection of shops"
     },
     "Shop": {
+      "uniqueItems": null,
       "type": "object",
       "title": "Shop",
       "required": [
