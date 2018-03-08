@@ -7,6 +7,46 @@
   ],
   "swagger": "2.0",
   "paths": {
+    "/api/shops/{id}/template_instances": {
+      "get": {
+        "tags": [
+          "TemplateInstance"
+        ],
+        "summary": "List template instances",
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/TemplateInstances"
+            },
+            "description": "Ok"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "required": true,
+            "name": "Authorization",
+            "in": "header",
+            "description": "OAuth2 access token"
+          },
+          {
+            "type": "string",
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "description": "The id of the shop"
+          }
+        ],
+        "operationId": "PhenixDisplaysWeb.API.Public.TemplateInstanceController.index",
+        "description": "List template instances"
+      }
+    },
     "/api/shops/{id}": {
       "patch": {
         "tags": [
@@ -37,7 +77,7 @@
             "required": true,
             "name": "id",
             "in": "path",
-            "description": "The uuid of the shop"
+            "description": "The id of the shop"
           },
           {
             "schema": {
@@ -148,6 +188,81 @@
   },
   "host": "localhost:4000",
   "definitions": {
+    "TemplateInstances": {
+      "type": "array",
+      "title": "Template Instances",
+      "items": {
+        "$ref": "#/definitions/TemplateInstance"
+      },
+      "description": "A collection of template instances"
+    },
+    "TemplateInstance": {
+      "type": "object",
+      "title": "Template Instance",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "video_url": {
+          "type": "string"
+        },
+        "use_template_background": {
+          "type": "boolean"
+        },
+        "status": {
+          "type": "string"
+        },
+        "preview_video_url": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "in_planning": {
+          "type": "boolean"
+        },
+        "id": {
+          "type": "integer",
+          "description": "Unique identifier"
+        },
+        "dirty": {
+          "type": "boolean"
+        },
+        "custom_attributes": {
+          "type": "object"
+        },
+        "custom_attribute_labels": {
+          "type": "object"
+        },
+        "can_be_manually_published": {
+          "type": "boolean"
+        },
+        "background_url": {
+          "type": "string"
+        }
+      },
+      "example": {
+        "video_url": "https://your_domain/instance_name_preview.mp4",
+        "use_template_background": true,
+        "status": "not published",
+        "preview_video_url": "https://your_domain/instance_name.mp4",
+        "name": "instance_name",
+        "in_planning": false,
+        "id": 1,
+        "dirty": false,
+        "custom_attributes": {
+          "rank": "1",
+          "product_name": "Voyamar"
+        },
+        "custom_attribute_labels": {
+          "rank": "N° de produit Voyamar",
+          "product_name": "Nom de produit"
+        },
+        "can_be_manually_published": false,
+        "background_url": "https://your_domain/background.mp4"
+      },
+      "description": "A template instance of the application"
+    },
     "Shops": {
       "type": "array",
       "title": "Shops",
@@ -160,13 +275,9 @@
       "type": "object",
       "title": "Shop",
       "required": [
-        "uuid"
+        "id"
       ],
       "properties": {
-        "uuid": {
-          "type": "integer",
-          "description": "Unique identifier"
-        },
         "shop_kind_id": {
           "type": "integer"
         },
@@ -178,6 +289,10 @@
         },
         "name": {
           "type": "string"
+        },
+        "id": {
+          "type": "integer",
+          "description": "Unique identifier"
         },
         "address": {
           "type": "string"
