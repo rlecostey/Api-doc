@@ -176,6 +176,46 @@
         "operationId": "PhenixDisplaysWeb.API.Public.ShopController.index",
         "description": "List shops"
       }
+    },
+    "/api/private/templates/{id}/template_instances": {
+      "get": {
+        "tags": [
+          "TemplateInstance"
+        ],
+        "summary": "Retrieve template instance associated to specified template",
+        "responses": {
+          "400": {
+            "description": "Bad Request"
+          },
+          "200": {
+            "schema": {
+              "$ref": "#/definitions/TemplateInstance"
+            },
+            "description": "Ok"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "type": "string",
+            "required": true,
+            "name": "Authorization",
+            "in": "header",
+            "description": "OAuth2 access token"
+          },
+          {
+            "type": "string",
+            "required": true,
+            "name": "id",
+            "in": "path",
+            "description": "The id of the template"
+          }
+        ],
+        "operationId": "PhenixDisplaysWeb.API.Public.TemplateInstanceController.index",
+        "description": "Create new template instance if this template is not currently associated to a template instance, then return template instance"
+      }
     }
   },
   "info": {
